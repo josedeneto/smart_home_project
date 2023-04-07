@@ -1,8 +1,8 @@
 import 'package:smart_home/model/device_model.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_home/theme/app_color.dart';
 
-class DeviceRepositories {
-  
+class DeviceRepositories extends ChangeNotifier {
   final List<DeviceModel> _devicesList = [];
   List<DeviceModel> get devicesList => _devicesList;
 
@@ -13,30 +13,25 @@ class DeviceRepositories {
           name: 'Smart',
           function: 'Tv',
           icon: Icons.abc,
-          isActive: true,
-          color: Colors.red.shade800,
-          
+          color: AppColor.red,
         ),
         DeviceModel(
           name: 'Smart',
           function: 'AC',
           icon: Icons.abc,
-          isActive: true,
-          color: Colors.blue.shade800,
+          color: AppColor.indigo,
         ),
         DeviceModel(
           name: 'Smart',
           function: 'Quarto',
           icon: Icons.abc,
-          isActive: false,
-          color: Colors.yellow.shade800,
+          color: AppColor.yellow,
         ),
         DeviceModel(
           name: 'Smart',
           function: 'Sla',
           icon: Icons.abc,
-          isActive: false,
-          color: Colors.green.shade800,
+          color: AppColor.green,
         ),
       ],
     );

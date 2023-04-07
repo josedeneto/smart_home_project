@@ -1,22 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:smart_home/pages/home/home_page.dart';
+
+import 'app/app_smart.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Smart Home',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const HomePage(),
-    );
-  }
+  runApp(const AppSmart());
 }

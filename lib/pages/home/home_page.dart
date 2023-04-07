@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:smart_home/controller/home_page_controller.dart';
+import 'package:provider/provider.dart';
 import 'package:smart_home/device_tile.dart';
 import 'package:smart_home/repositories/device_repositories.dart';
+import 'package:smart_home/theme/app_color.dart';
+
+import 'components/header_components.dart';
+import 'components/number_device_menu_component.dart';
+import 'controller/home_page_controller.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,54 +16,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final homePageController = HomePageController();
-  final deviceRepositories = DeviceRepositories();
-  @override
-  void initState() {
-    homePageController.addListener(() {
-      setState(() {});
-    });
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.scaffoldBackground,
       body: SafeArea(
         child: Stack(
           children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              color: Colors.yellow,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  top: 16,
-                  right: 16,
-                  left: 16,
-                  bottom: 8,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text(
-                          'Hi, Dimest',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        CircleAvatar(
-                          backgroundColor: Colors.green,
-                          radius: 20,
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            const HeaderComponent(),
             Padding(
               padding: const EdgeInsets.only(
                 top: 0,
@@ -71,55 +36,60 @@ class _HomePageState extends State<HomePage> {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.70,
                   decoration: BoxDecoration(
-                    color: Colors.red,
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color.fromARGB(
+                          255,
+                          230,
+                          229,
+                          229,
+                        ),
+                        blurRadius: 1,
+                        spreadRadius: 2,
+                        blurStyle: BlurStyle.outer,
+                      ),
+                    ],
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: const [
-                              Text('A total of 4 devices'),
-                              Text('Living Room')
-                            ],
-                          ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.menu),
-                          )
-                        ],
-                      ),
+                      const NumberOfDeviceMenuComponent(),
                       const SizedBox(height: 5),
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: GridView.builder(
-                            
-                            itemCount: deviceRepositories.devicesList.length,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 12,
-                              mainAxisSpacing: 10
-                            ),
-                            itemBuilder: (context, i) {
-                              final data = deviceRepositories.devicesList;
-                              return DeviceTile(
-                                nameDevice:data[i].name,
-                                icon: data[i].icon,
-                                functionName: data[i].function,
-                                valueSwitch: homePageController.isActive,
-                                color: homePageController.isActive
-                                    ? data[i].color
-                                    : Colors.white,
-                                onTap: homePageController.activeDevice,
+                          child: Consumer(
+                            builder: (context, value, child) {
+                              final deviceRepo =
+                                  context.read<DeviceRepositories>();
+                              final deviceController =
+                                  context.read<HomePageController>();
+                              return GridView.builder(
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 13,
+                                  mainAxisSpacing: 16,
+                                ),
+                                itemCount: deviceRepo.devicesList.length,
+                                itemBuilder: (_, i) {
+                                  return DeviceTile(
+                                    color: deviceController.isActive
+                                        ? deviceRepo.devicesList[i].color
+                                        : Colors.white,
+                                    nameDevice: deviceRepo.devicesList[i].name,
+                                    icon: deviceRepo.devicesList[i].icon,
+                                    onTap: deviceController.activeDevice,
+                                    functionName:
+                                        deviceRepo.devicesList[i].function,
+                                    valueSwitch: context
+                                        .watch<HomePageController>()
+                                        .isActive,
+                                  );
+                                },
                               );
                             },
                           ),
