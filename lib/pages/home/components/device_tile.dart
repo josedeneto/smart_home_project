@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'pages/home/controller/home_page_controller.dart';
+import '../controller/home_page_controller.dart';
+
 
 class DeviceTile extends StatefulWidget {
   const DeviceTile(
