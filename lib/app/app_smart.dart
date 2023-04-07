@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../pages/home/controller/home_page_controller.dart';
 import '../pages/home/home_page.dart';
 import '../repositories/device_repositories.dart';
-import '../value.dart';
 
 class AppSmart extends StatelessWidget {
   const AppSmart({Key? key}) : super(key: key);
@@ -26,7 +25,7 @@ class AppSmart extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const Value(),
+        home: const HomePage(),
       ),
     );
   }

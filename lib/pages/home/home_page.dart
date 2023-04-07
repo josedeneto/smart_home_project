@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:smart_home/device_tile.dart';
 import 'package:smart_home/repositories/device_repositories.dart';
 import 'package:smart_home/theme/app_color.dart';
 
+import 'components/device_tile.dart';
 import 'components/header_components.dart';
 import 'components/number_device_menu_component.dart';
 import 'controller/home_page_controller.dart';
