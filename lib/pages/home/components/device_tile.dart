@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 
 import '../controller/home_page_controller.dart';
 
-
 class DeviceTile extends StatefulWidget {
   const DeviceTile(
       {Key? key,
