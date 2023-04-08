@@ -61,33 +61,25 @@ class _HomePageState extends State<HomePage> {
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Consumer(
-                            builder: (context, value, child) {
-                              final deviceRepo =
-                                  context.read<DeviceRepositories>();
-                              final deviceController =
-                                  context.read<HomePageController>();
+                          child: Consumer<DeviceRepositories>(
+                            builder: (context, deviceRepo, child) {
+                              final deviceController = context.watch<HomePageController>();
                               return GridView.builder(
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
                                   crossAxisSpacing: 13,
                                   mainAxisSpacing: 16,
                                 ),
                                 itemCount: deviceRepo.devicesList.length,
                                 itemBuilder: (_, i) {
+                                  final deviceModel = deviceRepo.devicesList[i];
                                   return DeviceTile(
-                                    color: deviceController.isActive
-                                        ? deviceRepo.devicesList[i].color
-                                        : Colors.white,
-                                    nameDevice: deviceRepo.devicesList[i].name,
-                                    icon: deviceRepo.devicesList[i].icon,
-                                    onTap: deviceController.activeDevice,
-                                    functionName:
-                                        deviceRepo.devicesList[i].function,
-                                    valueSwitch: context
-                                        .watch<HomePageController>()
-                                        .isActive,
+                                    color: deviceModel.isActive ? deviceModel.color : Colors.white,
+                                    nameDevice: deviceModel.name,
+                                    icon: deviceModel.icon,
+                                    onTap: (active) => deviceController.activeDevice(active, devices: deviceRepo, index: i),
+                                    functionName: deviceModel.function,
+                                    valueSwitch: deviceModel.isActive,
                                   );
                                 },
                               );
