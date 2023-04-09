@@ -36,7 +36,7 @@ class NumberOfDeviceMenuComponent extends StatelessWidget {
           IconButton(
             onPressed: () {},
             icon: const Icon(
-              Icons.menu,
+              Icons.more_horiz,
             ),
           )
         ],

@@ -71,11 +71,14 @@ class _DeviceTileState extends State<DeviceTile> {
                 ],
               ),
             ),
-            CupertinoSwitch(
-              trackColor: Colors.black,
-              activeColor: Colors.indigoAccent,
-              value: widget.valueSwitch,
-              onChanged: widget.onTap,
+            Transform.scale(
+              scale: 0.8,
+              child: CupertinoSwitch(
+                trackColor: Colors.black,
+                activeColor: Colors.indigoAccent,
+                value: widget.valueSwitch,
+                onChanged: widget.onTap,
+              ),
             ),
           ],
         ),

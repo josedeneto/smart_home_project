@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                                   return DeviceTile(
                                     color: deviceModel.isActive ? deviceModel.color : Colors.white,
                                     nameDevice: deviceModel.name,
-                                    image: deviceModel.image,
+                                    image:deviceModel.function=='Sound' && deviceModel.isActive?'assets/image/aud.gif' :deviceModel.image ,
                                     onTap: (active) => deviceController.activeDevice(active, devices: deviceRepo, index: i),
                                     functionName: deviceModel.function,
                                     valueSwitch: deviceModel.isActive,

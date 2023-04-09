@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:smart_home/model/device_model.dart';
 import 'package:smart_home/theme/app_color.dart';
 
@@ -15,7 +14,7 @@ class DeviceRepositories extends ChangeNotifier {
           function: 'Tv',
           image: 'assets/image/spotlight.png',
           color: AppColor.red,
-          isActive: false,
+          isActive: true,
         ),
         DeviceModel(
             name: 'Smart',
@@ -31,10 +30,10 @@ class DeviceRepositories extends ChangeNotifier {
             isActive: false),
         DeviceModel(
             name: 'Smart',
-            function: 'Sla',
-            image: 'assets/image/icons8-onda-de-áudio.gif',
+            function: 'Sound',
+            image: 'assets/image/speaker.png',
             color: AppColor.grey,
-            isActive: true),
+            isActive: false),
       ],
     );
   }
