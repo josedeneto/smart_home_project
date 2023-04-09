@@ -9,14 +9,14 @@ class DeviceTile extends StatefulWidget {
       {Key? key,
       this.functionName = 'Smart',
       required this.nameDevice,
-      required this.icon,
+      required this.image,
       this.valueSwitch = false,
       this.color,
       required this.onTap})
       : super(key: key);
   final String functionName;
   final String nameDevice;
-  final IconData icon;
+  final String image;
   final bool valueSwitch;
   final Color? color;
   final bool? Function(bool? value) onTap;
@@ -41,19 +41,21 @@ class _DeviceTileState extends State<DeviceTile> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(
+            Image.asset(widget.image,width: 50,
+            ),
+            /*Icon(
               Icons.radio_rounded,
               color: context.watch<HomePageController>().isActive
                   ? Colors.white
                   : Colors.black,
-            ),
+            ),*/
             RichText(
               text: TextSpan(
                 children: [
                   TextSpan(
                     text: '${widget.functionName}\n',
                     style: TextStyle(
-                      color: context.watch<HomePageController>().isActive
+                      color: context.watch<HomePageController>().isActived
                           ? Colors.white
                           : Colors.black,
                     ),
@@ -61,7 +63,7 @@ class _DeviceTileState extends State<DeviceTile> {
                   TextSpan(
                     text: widget.nameDevice,
                     style: TextStyle(
-                      color: context.watch<HomePageController>().isActive
+                      color: context.watch<HomePageController>().isActived
                           ? Colors.white
                           : Colors.black,
                     ),
@@ -70,9 +72,7 @@ class _DeviceTileState extends State<DeviceTile> {
               ),
             ),
             CupertinoSwitch(
-              trackColor: !context.watch<HomePageController>().isActive
-                  ? Colors.black
-                  : Colors.brown,
+              trackColor: Colors.black,
               activeColor: Colors.indigoAccent,
               value: widget.valueSwitch,
               onChanged: widget.onTap,

@@ -16,9 +16,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  
   bool active = false;
+   
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+     final double itemHeight = (size.height - kToolbarHeight - 130) / 2;
+    final double itemWidth = size.width / 2;
     return Scaffold(
       backgroundColor: AppColor.scaffoldBackground,
       body: SafeArea(
@@ -27,15 +32,16 @@ class _HomePageState extends State<HomePage> {
             const HeaderComponent(),
             Padding(
               padding: const EdgeInsets.only(
-                top: 0,
+                top: 25,
                 right: 16,
                 left: 16,
-                bottom: 12,
+                bottom: 6,
               ),
-              child: Center(
+              child: Align(
+                alignment: Alignment.center,
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.70,
+                  height: MediaQuery.of(context).size.height * 0.75,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
@@ -66,10 +72,11 @@ class _HomePageState extends State<HomePage> {
                             builder: (context, deviceRepo, child) {
                               final deviceController = context.watch<HomePageController>();
                               return GridView.builder(
-                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
                                   crossAxisSpacing: 13,
                                   mainAxisSpacing: 16,
+                                  childAspectRatio: (itemWidth/itemHeight)
                                 ),
                                 itemCount: deviceRepo.devicesList.length,
                                 itemBuilder: (_, i) {
@@ -77,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                                   return DeviceTile(
                                     color: deviceModel.isActive ? deviceModel.color : Colors.white,
                                     nameDevice: deviceModel.name,
-                                    icon: deviceModel.icon,
+                                    image: deviceModel.image,
                                     onTap: (active) => deviceController.activeDevice(active, devices: deviceRepo, index: i),
                                     functionName: deviceModel.function,
                                     valueSwitch: deviceModel.isActive,

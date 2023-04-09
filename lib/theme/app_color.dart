@@ -8,4 +8,6 @@ class AppColor {
   static const scaffoldBackground = Color.fromARGB(255, 245, 244, 244);
   static const indigo = Colors.indigo;
   static const green = Color.fromARGB(255, 26, 110, 29);
+  static const grey = Color.fromARGB(255, 255, 254, 254);
+
 }
