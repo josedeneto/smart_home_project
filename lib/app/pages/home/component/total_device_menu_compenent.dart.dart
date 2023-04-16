@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:smart_home/theme/app_typography.dart';
 
-class NumberOfDeviceMenuComponent extends StatelessWidget {
-  const NumberOfDeviceMenuComponent({
+import '../../../utils/theme/app_typography.dart';
+
+class TotalDeviceMenuComponent extends StatelessWidget {
+  const TotalDeviceMenuComponent({
     Key? key,
   }) : super(key: key);
 

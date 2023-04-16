@@ -1,32 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:smart_home/app/utils/theme/app_theme.dart';
 
-import '../pages/home/controller/home_page_controller.dart';
-import '../pages/home/home_page.dart';
-import '../repositories/device_repositories.dart';
+import 'pages/home/home_page.dart';
 
 class AppSmart extends StatelessWidget {
   const AppSmart({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => HomePageController(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => DeviceRepositories(),
-        )
-      ],
-      child: MaterialApp(
-        title: 'Smart Home',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const HomePage(),
-      ),
+    return MaterialApp(
+      title: 'Smart Home',
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.theme,
+      home: const HomePage(),
     );
   }
 }
